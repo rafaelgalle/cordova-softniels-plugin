@@ -1,0 +1,21 @@
+{
+  "name": "cordova-softniels-plugin",
+  "version": "1.0.0",
+  "description": "Plugin softniels",
+  "cordova": {
+    "id": "cordova-softniels-plugin",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "cordova-softniels-plugin"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Rafael Galle",
+  "license": "ISC"
+}
