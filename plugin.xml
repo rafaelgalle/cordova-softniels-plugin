@@ -7,10 +7,16 @@
     <license>Apache 2.0</license>
     <author>Rafael Galle</author>
 
+	<preference name="phonegap-version" value="cli-8.1.1" />
+	<preference name="pgb-builder-version" value="2" />
+    <!-- <preference name="android-minSdkVersion" value="21" />
+    <preference name="android-targetSdkVersion" value="28"/> -->
+
     <!-- cordova -->
     <engines>
         <engine name="cordova" version=">=3.0.0" />
-        <engine name="android-sdk" version=">=16" />
+        <engine name="android-sdk" version=">=21" />
+		<engine name="android" spec="7.0.0" />
         <engine name="windows-sdk" version=">=10.0.14393.0" />
     </engines>
 
