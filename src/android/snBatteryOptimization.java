@@ -137,7 +137,7 @@ public class snBatteryOptimization extends CordovaPlugin {
     {
 
         
-        callbackContext.success("teste ok retorno message: " + message);
+        //callbackContext.success("teste ok retorno messageeeee: " + message);
 
         Activity activity = cordova.getActivity();
         callbackContext.success("teste ok retorno message1: " + message);
