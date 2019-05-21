@@ -94,6 +94,13 @@ public class snBatteryOptimization extends CordovaPlugin {
         cordova.getActivity().startActivity(intent);
     }
 
+    /**
+     * Returns the activity referenced by cordova.
+     */
+    Activity getApp() {
+        return cordova.getActivity();
+    }
+
 
     /**
      * Get the requested system service by name.
