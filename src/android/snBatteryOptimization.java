@@ -49,6 +49,9 @@ import static android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
  */
 public class snBatteryOptimization extends CordovaPlugin {
 
+    // To keep the device awake
+    private PowerManager.WakeLock wakeLock;
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("battery")) {
