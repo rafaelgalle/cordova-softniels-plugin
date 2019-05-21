@@ -73,12 +73,15 @@ public class snBatteryOptimization extends CordovaPlugin {
             case "battery":
                 disableBatteryOptimizations();
                 break;
+            case "teste":
+                disableBatteryOptimizationsteste();
+                break;
             default:
                 validAction = false;
         }
 
         if (validAction) {
-            callback.success();
+            callback.success("teste ok retorno: " + action);
         } else {
             callback.error("Invalid action: " + action);
         }
@@ -135,6 +138,10 @@ public class snBatteryOptimization extends CordovaPlugin {
         cordova.getActivity().startActivity(intent);
     }
 
+    private void disableBatteryOptimizationsteste()
+    {
+        
+    }
 
     /**
      * Returns the activity referenced by cordova.
