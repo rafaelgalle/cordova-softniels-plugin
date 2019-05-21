@@ -137,14 +137,14 @@ public class snBatteryOptimization extends CordovaPlugin {
     {
 
         
-        callback.success("teste ok retorno message: " + message);
+        callbackContext.success("teste ok retorno message: " + message);
 
         Activity activity = cordova.getActivity();
-        callback.success("teste ok retorno message1: " + message);
+        callbackContext.success("teste ok retorno message1: " + message);
         Intent intent     = new Intent();
         String pkgName    = activity.getPackageName();
         PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
-        callback.success("teste ok retorno message2: " + message);
+        callbackContext.success("teste ok retorno message2: " + message);
 
         // if (SDK_INT < M)
         //     return;
@@ -154,9 +154,9 @@ public class snBatteryOptimization extends CordovaPlugin {
 
         intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
         intent.setData(Uri.parse("package:" + pkgName));
-        callback.success("teste ok retorno message3: " + message);
+        callbackContext.success("teste ok retorno message3: " + message);
         cordova.getActivity().startActivity(intent);
-        callback.success("teste ok retorno message4: " + message);
+        callbackContext.success("teste ok retorno message4: " + message);
     }
 
     /**
