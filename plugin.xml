@@ -1,9 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="cordova-softniels-plugin" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 	<name>snBatteryOptimization</name>
+    <description>Controle sobre otimização de bateria.</description>
+    <repo>https://github.com/rafaelgalle/cordova-softniels-plugin.git</repo>
+    <keywords>Battery, Optimization</keywords>
+    <license>Apache 2.0</license>
+    <author>Rafael Galle</author>
+
+    <!-- cordova -->
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+        <engine name="android-sdk" version=">=16" />
+        <engine name="windows-sdk" version=">=10.0.14393.0" />
+    </engines>
+
+    <!-- js -->
 	<js-module name="snBatteryOptimization" src="www/snBatteryOptimization.js">
 		<clobbers target="cordova.plugins.snBatteryOptimization" />
 	</js-module>
+
+	<!-- android -->
 	<platform name="android">
 		<config-file parent="/*" target="res/xml/config.xml">
 			<feature name="snBatteryOptimization">
