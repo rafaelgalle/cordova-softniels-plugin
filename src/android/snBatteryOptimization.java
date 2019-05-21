@@ -1,3 +1,4 @@
+
 /*
  Copyright 2013 Sebastián Katzer
  Licensed to the Apache Software Foundation (ASF) under one
@@ -85,48 +86,19 @@ public class snBatteryOptimization extends CordovaPlugin {
         switch (action)
         {
             case "battery":
-                disableBatteryOptimizations(action, callback);
+                disableBatteryOptimizations();
                 break;
             default:
                 validAction = false;
         }
 
-        // if (validAction) {
-        //     callback.success("teste ok retorno: " + action);
-        // } else {
-        //     callback.error("Invalid action: " + action);
-        // }
+        if (validAction) {
+            callback.success("teste ok retorno: " + action);
+        } else {
+            callback.error("Invalid action: " + action);
+        }
 
         return validAction;
-    }
-
-    /**
-     * Moves the app to the background.
-     */
-    private void moveToBackground()
-    {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-
-        intent.addCategory(Intent.CATEGORY_HOME);
-
-        getApp().startActivity(intent);
-    }
-
-    /**
-     * Moves the app to the foreground.
-     */
-    private void moveToForeground()
-    {
-        Activity  app = getApp();
-        Intent intent = getLaunchIntent();
-
-        intent.addFlags(
-                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
-                Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-        clearScreenAndKeyguardFlags();
-        app.startActivity(intent);
     }
 
     /**
@@ -162,7 +134,7 @@ public class snBatteryOptimization extends CordovaPlugin {
      * Requires permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS to function.
      */
     @SuppressLint("BatteryLife")
-    private void disableBatteryOptimizations(String message, CallbackContext callbackContext)
+    private void disableBatteryOptimizations()
     {
         Activity activity = cordova.getActivity();
         Intent intent     = new Intent();
@@ -178,188 +150,8 @@ public class snBatteryOptimization extends CordovaPlugin {
         intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
         intent.setData(Uri.parse("package:" + pkgName));
         cordova.getActivity().startActivity(intent);
-        callbackContext.success("teste ok retorno message4: " + message + " SDK_INT: " + SDK_INT + " M: " + M + " pkgName: " + pkgName);
-
     }
-
-    /**
-     * Opens the system settings dialog where the user can tweak or turn off any
-     * custom app start settings added by the manufacturer if available.
-     *
-     * @param arg Text and title for the dialog or false to skip the dialog.
-     */
-    private void openAppStart (Object arg)
-    {
-        Activity activity = cordova.getActivity();
-        PackageManager pm = activity.getPackageManager();
-
-        for (Intent intent : getAppStartIntents())
-        {
-            if (pm.resolveActivity(intent, MATCH_DEFAULT_ONLY) != null)
-            {
-                JSONObject spec = (arg instanceof JSONObject) ? (JSONObject) arg : null;
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                if (arg instanceof Boolean && !((Boolean) arg))
-                {
-                    activity.startActivity(intent);
-                    break;
-                }
-
-                AlertDialog.Builder dialog = new AlertDialog.Builder(activity, Theme_DeviceDefault_Light_Dialog);
-
-                dialog.setPositiveButton(ok, (o, d) -> activity.startActivity(intent));
-                dialog.setNegativeButton(cancel, (o, d) -> {});
-                dialog.setCancelable(true);
-
-                if (spec != null && spec.has("title"))
-                {
-                    dialog.setTitle(spec.optString("title"));
-                }
-
-                if (spec != null && spec.has("text"))
-                {
-                    dialog.setMessage(spec.optString("text"));
-                }
-                else
-                {
-                    dialog.setMessage("missing text");
-                }
-
-                activity.runOnUiThread(dialog::show);
-
-                break;
-            }
-        }
-    }
-
-    /**
-     * Excludes the app from the recent tasks list.
-     */
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private void excludeFromTaskList()
-    {
-        ActivityManager am = (ActivityManager) getService(ACTIVITY_SERVICE);
-
-        if (am == null || SDK_INT < 21)
-            return;
-
-        List<AppTask> tasks = am.getAppTasks();
-
-        if (tasks == null || tasks.isEmpty())
-            return;
-
-        tasks.get(0).setExcludeFromRecents(true);
-    }
-
-    /**
-     * Invokes the callback with information if the screen is on.
-     *
-     * @param callback The callback to invoke.
-     */
-    @SuppressWarnings("deprecation")
-    private void isDimmed (CallbackContext callback)
-    {
-        boolean status   = isDimmed();
-        PluginResult res = new PluginResult(Status.OK, status);
-
-        callback.sendPluginResult(res);
-    }
-
-    /**
-     * Returns if the screen is active.
-     */
-    @SuppressWarnings("deprecation")
-    private boolean isDimmed()
-    {
-        PowerManager pm = (PowerManager) getService(POWER_SERVICE);
-
-        if (SDK_INT < 20)
-        {
-            return !pm.isScreenOn();
-        }
-
-        return !pm.isInteractive();
-    }
-
-    /**
-     * Wakes up the device if the screen isn't still on.
-     */
-    private void wakeup()
-    {
-        try {
-            acquireWakeLock();
-        } catch (Exception e) {
-            releaseWakeLock();
-        }
-    }
-
-    /**
-     * Unlocks the device even with password protection.
-     */
-    private void unlock()
-    {
-        addSreenAndKeyguardFlags();
-        getApp().startActivity(getLaunchIntent());
-    }
-
-    /**
-     * Acquires a wake lock to wake up the device.
-     */
-    @SuppressWarnings("deprecation")
-    private void acquireWakeLock()
-    {
-        PowerManager pm = (PowerManager) getService(POWER_SERVICE);
-
-        releaseWakeLock();
-
-        if (!isDimmed())
-            return;
-
-        int level = PowerManager.SCREEN_DIM_WAKE_LOCK |
-                    PowerManager.ACQUIRE_CAUSES_WAKEUP;
-
-        wakeLock = pm.newWakeLock(level, "backgroundmode:wakelock");
-        wakeLock.setReferenceCounted(false);
-        wakeLock.acquire(1000);
-    }
-
-    /**
-     * Releases the previously acquire wake lock.
-     */
-    private void releaseWakeLock()
-    {
-        if (wakeLock != null && wakeLock.isHeld()) {
-            wakeLock.release();
-            wakeLock = null;
-        }
-    }
-
-    /**
-     * Adds required flags to the window to unlock/wakeup the device.
-     */
-    private void addSreenAndKeyguardFlags()
-    {
-        getApp().runOnUiThread(() -> getApp().getWindow().addFlags(FLAG_ALLOW_LOCK_WHILE_SCREEN_ON | FLAG_SHOW_WHEN_LOCKED | FLAG_TURN_SCREEN_ON | FLAG_DISMISS_KEYGUARD));
-    }
-
-    /**
-     * Clears required flags to the window to unlock/wakeup the device.
-     */
-    private void clearScreenAndKeyguardFlags()
-    {
-        getApp().runOnUiThread(() -> getApp().getWindow().clearFlags(FLAG_ALLOW_LOCK_WHILE_SCREEN_ON | FLAG_SHOW_WHEN_LOCKED | FLAG_TURN_SCREEN_ON | FLAG_DISMISS_KEYGUARD));
-    }
-
-    /**
-     * Removes required flags to the window to unlock/wakeup the device.
-     */
-    static void clearKeyguardFlags (Activity app)
-    {
-        app.runOnUiThread(() -> app.getWindow().clearFlags(FLAG_DISMISS_KEYGUARD));
-    }
-
+    
     /**
      * Returns the activity referenced by cordova.
      */
