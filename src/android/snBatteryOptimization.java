@@ -1,4 +1,4 @@
-package cordova.softniels.plugin;
+package com.br.cordova;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
