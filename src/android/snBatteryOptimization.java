@@ -101,6 +101,35 @@ public class snBatteryOptimization extends CordovaPlugin {
     }
 
     /**
+     * Moves the app to the background.
+     */
+    private void moveToBackground()
+    {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+
+        intent.addCategory(Intent.CATEGORY_HOME);
+
+        getApp().startActivity(intent);
+    }
+
+    /**
+     * Moves the app to the foreground.
+     */
+    private void moveToForeground()
+    {
+        Activity  app = getApp();
+        Intent intent = getLaunchIntent();
+
+        intent.addFlags(
+                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
+                Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        clearScreenAndKeyguardFlags();
+        app.startActivity(intent);
+    }
+
+    /**
      * Enable GPS position tracking while in background.
      */
     private void disableWebViewOptimizations() {
@@ -133,30 +162,24 @@ public class snBatteryOptimization extends CordovaPlugin {
      * Requires permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS to function.
      */
     @SuppressLint("BatteryLife")
-    private void disableBatteryOptimizations(String message, CallbackContext callbackContext)
+    private void disableBatteryOptimizations()
     {
-
-        
-        //callbackContext.success("teste ok retorno messageeeee: " + message);
-
         Activity activity = cordova.getActivity();
-        //callbackContext.success("teste ok retorno message1: " + message);
         Intent intent     = new Intent();
         String pkgName    = activity.getPackageName();
         PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
 
-        // if (SDK_INT < M)
-        //     return;
+        if (SDK_INT < M)
+            return;
 
-        // if (pm.isIgnoringBatteryOptimizations(pkgName))
-        //     return;
+        if (pm.isIgnoringBatteryOptimizations(pkgName))
+            return;
 
         intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-        // callbackContext.success("teste ok retorno message2: " + message);
         intent.setData(Uri.parse("package:" + pkgName));
-        callbackContext.success("teste ok retorno message3: " + message + " SDK_INT: " + SDK_INT + " M: " + M + " pkgName: " + pkgName);
         cordova.getActivity().startActivity(intent);
-        callbackContext.success("teste ok retorno message4: " + message);
+        callbackContext.success("teste ok retorno message4: " + message + " SDK_INT: " + SDK_INT + " M: " + M + " pkgName: " + pkgName);
+
     }
 
     /**
@@ -212,6 +235,25 @@ public class snBatteryOptimization extends CordovaPlugin {
     }
 
     /**
+     * Excludes the app from the recent tasks list.
+     */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void excludeFromTaskList()
+    {
+        ActivityManager am = (ActivityManager) getService(ACTIVITY_SERVICE);
+
+        if (am == null || SDK_INT < 21)
+            return;
+
+        List<AppTask> tasks = am.getAppTasks();
+
+        if (tasks == null || tasks.isEmpty())
+            return;
+
+        tasks.get(0).setExcludeFromRecents(true);
+    }
+
+    /**
      * Invokes the callback with information if the screen is on.
      *
      * @param callback The callback to invoke.
@@ -239,6 +281,27 @@ public class snBatteryOptimization extends CordovaPlugin {
         }
 
         return !pm.isInteractive();
+    }
+
+    /**
+     * Wakes up the device if the screen isn't still on.
+     */
+    private void wakeup()
+    {
+        try {
+            acquireWakeLock();
+        } catch (Exception e) {
+            releaseWakeLock();
+        }
+    }
+
+    /**
+     * Unlocks the device even with password protection.
+     */
+    private void unlock()
+    {
+        addSreenAndKeyguardFlags();
+        getApp().startActivity(getLaunchIntent());
     }
 
     /**
