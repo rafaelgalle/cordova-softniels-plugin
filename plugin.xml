@@ -22,7 +22,7 @@
 	<platform name="android">
 		<config-file parent="/*" target="res/xml/config.xml">
 			<feature name="snBatteryOptimization">
-				<param name="android-package" value="com.br.cordova.battery_optimization" />
+				<param name="android-package" value="com.br.cordova.snBatteryOptimization" />
 			</feature>
 		</config-file>
 		<config-file parent="/*" target="AndroidManifest.xml">
