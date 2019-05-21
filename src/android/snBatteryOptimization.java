@@ -85,17 +85,17 @@ public class snBatteryOptimization extends CordovaPlugin {
         switch (action)
         {
             case "battery":
-                disableBatteryOptimizations();
+                disableBatteryOptimizations(action, callback);
                 break;
             default:
                 validAction = false;
         }
 
-        if (validAction) {
-            callback.success("teste ok retorno: " + action);
-        } else {
-            callback.error("Invalid action: " + action);
-        }
+        // if (validAction) {
+        //     callback.success("teste ok retorno: " + action);
+        // } else {
+        //     callback.error("Invalid action: " + action);
+        // }
 
         return validAction;
     }
@@ -133,12 +133,18 @@ public class snBatteryOptimization extends CordovaPlugin {
      * Requires permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS to function.
      */
     @SuppressLint("BatteryLife")
-    private void disableBatteryOptimizations()
+    private void disableBatteryOptimizations(String message, CallbackContext callbackContext)
     {
+
+        
+        callback.success("teste ok retorno message: " + message);
+
         Activity activity = cordova.getActivity();
+        callback.success("teste ok retorno message1: " + message);
         Intent intent     = new Intent();
         String pkgName    = activity.getPackageName();
         PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
+        callback.success("teste ok retorno message2: " + message);
 
         // if (SDK_INT < M)
         //     return;
@@ -148,8 +154,9 @@ public class snBatteryOptimization extends CordovaPlugin {
 
         intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
         intent.setData(Uri.parse("package:" + pkgName));
-
+        callback.success("teste ok retorno message3: " + message);
         cordova.getActivity().startActivity(intent);
+        callback.success("teste ok retorno message4: " + message);
     }
 
     /**
