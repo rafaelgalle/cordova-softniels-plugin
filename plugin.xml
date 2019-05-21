@@ -1,23 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-softniels-plugin" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="com.br.cordova.battery_optimization" version="1.0.1">
+<!-- <plugin id="cordova-softniels-plugin" version="1.0.0"> -->
 	<name>snBatteryOptimization</name>
     <description>Controle sobre otimização de bateria.</description>
+    <license>MIT</license>
+    <keywords>battery, optimization</keywords>
     <repo>https://github.com/rafaelgalle/cordova-softniels-plugin.git</repo>
-    <keywords>Battery, Optimization</keywords>
-    <license>Apache 2.0</license>
-    <author>Rafael Galle</author>
-
-	<preference name="phonegap-version" value="cli-8.1.1" />
-	<preference name="pgb-builder-version" value="2" />
-    <!-- <preference name="android-minSdkVersion" value="21" />
-    <preference name="android-targetSdkVersion" value="28"/> -->
+    <issue>https://github.com/rafaelgalle/cordova-softniels-plugin/issues</issue>
 
     <!-- cordova -->
     <engines>
         <engine name="cordova" version=">=3.0.0" />
-        <engine name="android-sdk" version=">=21" />
-		<engine name="android" spec="7.0.0" />
-        <engine name="windows-sdk" version=">=10.0.14393.0" />
     </engines>
 
     <!-- js -->
@@ -29,12 +22,12 @@
 	<platform name="android">
 		<config-file parent="/*" target="res/xml/config.xml">
 			<feature name="snBatteryOptimization">
-				<param name="android-package" value="cordova-softniels-plugin.snBatteryOptimization" />
+				<param name="android-package" value="com.br.cordova.battery_optimization" />
 			</feature>
 		</config-file>
 		<config-file parent="/*" target="AndroidManifest.xml">
 			
 		</config-file>
-		<source-file src="src/android/snBatteryOptimization.java" target-dir="src/cordova-softniels-plugin/snBatteryOptimization" />
+		<source-file src="src/android/snBatteryOptimization.java" target-dir="src/com/br/cordova/battery_optimization" />
 	</platform>
 </plugin>
