@@ -1,4 +1,4 @@
-package com.br.cordova;
+package cordova.softniels.plugin;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -51,8 +51,6 @@ public class snBatteryOptimization extends CordovaPlugin {
 
     // To keep the device awake
     private PowerManager.WakeLock wakeLock;
-
-
 
     /**
      * Executes the request.
