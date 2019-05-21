@@ -52,15 +52,58 @@ public class snBatteryOptimization extends CordovaPlugin {
     // To keep the device awake
     private PowerManager.WakeLock wakeLock;
 
+
+
+    /**
+     * Executes the request.
+     *
+     * @param action   The action to execute.
+     * @param args     The exec() arguments.
+     * @param callback The callback context used when
+     *                 calling back into JavaScript.
+     *
+     * @return Returning false results in a "MethodNotFound" error.
+     */
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("battery")) {
-            String message = args.getString(0);
-            this.disableBatteryOptimizations();
-            return true;
+    public boolean execute (String action, JSONArray args,
+                            CallbackContext callback)
+    {
+        boolean validAction = true;
+
+        switch (action)
+        {
+            case "battery":
+                disableBatteryOptimizations();
+                break;
+            default:
+                validAction = false;
         }
-        return false;
+
+        if (validAction) {
+            callback.success();
+        } else {
+            callback.error("Invalid action: " + action);
+        }
+
+        return validAction;
     }
+
+    // @Override
+    // public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    //     if (action.equals("battery")) {
+    //         String message = args.getString(0);
+    //         this.disableBatteryOptimizations();
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+
+
+
+
+
+
 
     // private void disableBatteryOptimizations(String message, CallbackContext callbackContext) {
         // if (message != null && message.length() > 0) {
@@ -93,6 +136,7 @@ public class snBatteryOptimization extends CordovaPlugin {
 
         cordova.getActivity().startActivity(intent);
     }
+
 
     /**
      * Returns the activity referenced by cordova.
