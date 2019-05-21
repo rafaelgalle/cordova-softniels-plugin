@@ -162,7 +162,7 @@ public class snBatteryOptimization extends CordovaPlugin {
      * Requires permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS to function.
      */
     @SuppressLint("BatteryLife")
-    private void disableBatteryOptimizations()
+    private void disableBatteryOptimizations(String message, CallbackContext callbackContext)
     {
         Activity activity = cordova.getActivity();
         Intent intent     = new Intent();
