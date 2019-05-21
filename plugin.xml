@@ -24,10 +24,18 @@
 			<feature name="snBatteryOptimization">
 				<param name="android-package" value="cordova.softniels.plugin.snBatteryOptimization" />
 			</feature>
+            <preference name="KeepRunning" value="true" />
 		</config-file>
+        
 		<config-file parent="/*" target="AndroidManifest.xml">
-			
 		</config-file>
+
+		<config-file parent="/manifest" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.WAKE_LOCK" />
+            <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+            <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+        </config-file>
+
 		<source-file src="src/android/snBatteryOptimization.java" target-dir="src/cordova/softniels/plugin/snBatteryOptimization" />
 	</platform>
 </plugin>
