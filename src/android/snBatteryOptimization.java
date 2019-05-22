@@ -64,8 +64,8 @@ import static android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
  */
 public class snBatteryOptimization extends CordovaPlugin {
 
-    // To keep the device awake
-    private PowerManager.WakeLock wakeLock;
+    // // To keep the device awake
+    // private PowerManager.WakeLock wakeLock;
 
     /**
      * Executes the request.
@@ -93,7 +93,7 @@ public class snBatteryOptimization extends CordovaPlugin {
         }
 
         if (validAction) {
-            callback.success("teste ok retorno: " + action);
+            callback.success("Action: " + action);
         } else {
             callback.error("Invalid action: " + action);
         }
@@ -101,33 +101,33 @@ public class snBatteryOptimization extends CordovaPlugin {
         return validAction;
     }
 
-    /**
-     * Enable GPS position tracking while in background.
-     */
-    private void disableWebViewOptimizations() {
-        Thread thread = new Thread(){
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                    getApp().runOnUiThread(() -> {
-                        View view = webView.getEngine().getView();
+    // /**
+    //  * Enable GPS position tracking while in background.
+    //  */
+    // private void disableWebViewOptimizations() {
+    //     Thread thread = new Thread(){
+    //         public void run() {
+    //             try {
+    //                 Thread.sleep(1000);
+    //                 getApp().runOnUiThread(() -> {
+    //                     View view = webView.getEngine().getView();
 
-                        try {
-                            Class.forName("org.crosswalk.engine.XWalkCordovaView")
-                                 .getMethod("onShow")
-                                 .invoke(view);
-                        } catch (Exception e){
-                            view.dispatchWindowVisibilityChanged(View.VISIBLE);
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    // do nothing
-                }
-            }
-        };
+    //                     try {
+    //                         Class.forName("org.crosswalk.engine.XWalkCordovaView")
+    //                              .getMethod("onShow")
+    //                              .invoke(view);
+    //                     } catch (Exception e){
+    //                         view.dispatchWindowVisibilityChanged(View.VISIBLE);
+    //                     }
+    //                 });
+    //             } catch (InterruptedException e) {
+    //                 // do nothing
+    //             }
+    //         }
+    //     };
 
-        thread.start();
-    }
+    //     thread.start();
+    // }
 
     /**
      * Disables battery optimizations for the app.

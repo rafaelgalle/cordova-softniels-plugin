@@ -24,7 +24,6 @@
 			<feature name="snBatteryOptimization">
 				<param name="android-package" value="cordova.softniels.plugin.snBatteryOptimization" />
 			</feature>
-            <preference name="KeepRunning" value="true" />
 		</config-file>
         
 		<config-file parent="/*" target="AndroidManifest.xml">
