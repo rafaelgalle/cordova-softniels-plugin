@@ -88,6 +88,9 @@ public class snBatteryOptimization extends CordovaPlugin {
             case "battery":
                 disableBatteryOptimizations();
                 break;
+            case "webview":
+                disableWebViewOptimizations();
+                break;                
             default:
                 validAction = false;
         }
@@ -101,33 +104,33 @@ public class snBatteryOptimization extends CordovaPlugin {
         return validAction;
     }
 
-    // /**
-    //  * Enable GPS position tracking while in background.
-    //  */
-    // private void disableWebViewOptimizations() {
-    //     Thread thread = new Thread(){
-    //         public void run() {
-    //             try {
-    //                 Thread.sleep(1000);
-    //                 getApp().runOnUiThread(() -> {
-    //                     View view = webView.getEngine().getView();
+    /**
+     * Enable GPS position tracking while in background.
+     */
+    private void disableWebViewOptimizations() {
+        Thread thread = new Thread(){
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    getApp().runOnUiThread(() -> {
+                        View view = webView.getEngine().getView();
 
-    //                     try {
-    //                         Class.forName("org.crosswalk.engine.XWalkCordovaView")
-    //                              .getMethod("onShow")
-    //                              .invoke(view);
-    //                     } catch (Exception e){
-    //                         view.dispatchWindowVisibilityChanged(View.VISIBLE);
-    //                     }
-    //                 });
-    //             } catch (InterruptedException e) {
-    //                 // do nothing
-    //             }
-    //         }
-    //     };
+                        try {
+                            Class.forName("org.crosswalk.engine.XWalkCordovaView")
+                                 .getMethod("onShow")
+                                 .invoke(view);
+                        } catch (Exception e){
+                            view.dispatchWindowVisibilityChanged(View.VISIBLE);
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    // do nothing
+                }
+            }
+        };
 
-    //     thread.start();
-    // }
+        thread.start();
+    }
 
     /**
      * Disables battery optimizations for the app.
