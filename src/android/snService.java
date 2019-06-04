@@ -17,7 +17,7 @@
  under the License.
  */
 
-package cordova.softniels.plugin;
+package cordova.plugin.service;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -44,6 +44,8 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 
+import cordova.plugin.service.HelloIntentService;
+
 import static android.R.string.cancel;
 import static android.R.string.ok;
 import static android.R.style.Theme_DeviceDefault_Light_Dialog;
@@ -62,7 +64,7 @@ import static android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON;
  * Implements extended functions around the main purpose
  * of infinite execution in the background.
  */
-public class snBatteryOptimization extends CordovaPlugin {
+public class snService extends CordovaPlugin {
 
     // // To keep the device awake
     // private PowerManager.WakeLock wakeLock;
@@ -85,12 +87,9 @@ public class snBatteryOptimization extends CordovaPlugin {
 
         switch (action)
         {
-            case "battery":
-                disableBatteryOptimizations();
+            case "startService1":
+                startService1();
                 break;
-            case "webview":
-                disableWebViewOptimizations();
-                break;                
             default:
                 validAction = false;
         }
@@ -105,54 +104,35 @@ public class snBatteryOptimization extends CordovaPlugin {
     }
 
     /**
-     * Enable GPS position tracking while in background.
+     * dsadsadsadsadsadsads
      */
-    private void disableWebViewOptimizations() {
-        Thread thread = new Thread(){
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                    getApp().runOnUiThread(() -> {
-                        View view = webView.getEngine().getView();
+    private void startService1() {
 
-                        try {
-                            Class.forName("org.crosswalk.engine.XWalkCordovaView")
-                                 .getMethod("onShow")
-                                 .invoke(view);
-                        } catch (Exception e){
-                            view.dispatchWindowVisibilityChanged(View.VISIBLE);
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    // do nothing
-                }
-            }
-        };
+        Toast.makeText(this, "snService 1", Toast.LENGTH_SHORT).show();
+        Activity context = cordova.getActivity();
 
-        thread.start();
-    }
+        // if (isDisabled || isBind)
+        //     return;
+        Toast.makeText(this, "snService 2", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(context, HelloIntentService.class);
+        Toast.makeText(this, "snService 3", Toast.LENGTH_SHORT).show();
+        try {
+            //context.bindService(intent, connection, BIND_AUTO_CREATE);
+            //fireEvent(Event.ACTIVATE, null);
+            Toast.makeText(this, "snService 4", Toast.LENGTH_SHORT).show();
+            context.startService(intent);
+        } catch (Exception e) {
+            Toast.makeText(this, "snService 5", Toast.LENGTH_SHORT).show();
+            //fireEvent(Event.FAILURE, String.format("'%s'", e.getMessage()));
+        }
 
-    /**
-     * Disables battery optimizations for the app.
-     * Requires permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS to function.
-     */
-    @SuppressLint("BatteryLife")
-    private void disableBatteryOptimizations()
-    {
-        Activity activity = cordova.getActivity();
-        Intent intent     = new Intent();
-        String pkgName    = activity.getPackageName();
-        PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
+        //isBind = true;
 
-        if (SDK_INT < M)
-            return;
 
-        if (pm.isIgnoringBatteryOptimizations(pkgName))
-            return;
+        // Doc GOOGLE DEV
+            // Intent intent = new Intent(this, HelloService.class);
+            // startService(intent);
 
-        intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-        intent.setData(Uri.parse("package:" + pkgName));
-        cordova.getActivity().startActivity(intent);
     }
     
     /**
