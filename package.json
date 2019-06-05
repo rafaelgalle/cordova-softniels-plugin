@@ -1,19 +1,20 @@
 {
-  "name": "cordova-plugin-service",
-  "version": "0.0.1",
-  "description": "Test Service1.",
+  "name": "cordova-softniels-plugin",
+  "version": "1.0.1",
+  "description": "Controle sobre otimização de bateria.",
   "cordova": {
-    "id": "cordova-plugin-service",
+    "id": "cordova-softniels-plugin",
     "platforms": [
       "android"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rafaelgalle/cordova-plugin-service.git"
+    "url": "https://github.com/rafaelgalle/cordova-softniels-plugin.git"
   },
   "keywords": [
-    "service"
+    "battery",
+    "optimization"
   ],
   "engines": [
     {
@@ -24,7 +25,29 @@
   "author": "Rafael Galle",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rafaelgalle/cordova-plugin-service/issues"
+    "url": "https://github.com/rafaelgalle/cordova-softniels-plugin/issues"
   },
-  "homepage": "https://github.com/rafaelgalle/cordova-plugin-service"
+  "homepage": "https://github.com/rafaelgalle/cordova-softniels-plugin"
 }
+
+// {
+//   "name": "cordova-softniels-plugin",
+//   "version": "1.0.0",
+//   "description": "Plugin softniels",
+//   "cordova": {
+//     "id": "cordova-softniels-plugin",
+//     "platforms": [
+//       "android"
+//     ]
+//   },
+//   "repository": {
+//     "type": "git",
+//     "url": "cordova-softniels-plugin"
+//   },
+//   "keywords": [
+//     "ecosystem:cordova",
+//     "cordova-android"
+//   ],
+//   "author": "Rafael Galle",
+//   "license": "ISC"
+// }
