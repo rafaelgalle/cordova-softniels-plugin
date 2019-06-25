@@ -66,6 +66,9 @@ public class snBatteryOptimization extends CordovaPlugin {
 
     // // To keep the device awake
     // private PowerManager.WakeLock wakeLock;
+ 
+    public final int MY_OP = 11;
+    private CallbackContext callback = null;
 
     /**
      * Executes the request.
@@ -79,29 +82,49 @@ public class snBatteryOptimization extends CordovaPlugin {
      */
     @Override
     public boolean execute (String action, JSONArray args,
-                            CallbackContext callback)
+                            CallbackContext callbackContext)
     {
         boolean validAction = true;
-
+        callback = callbackContext;
         switch (action)
         {
             case "battery":
-                disableBatteryOptimizations(callback);
+                disableBatteryOptimizations();
                 break;
             case "webview":
                 disableWebViewOptimizations();
-                break;                
+                break;
             default:
                 validAction = false;
         }
 
         if (validAction) {
-            //callback.success("Action: " + action);
+            //callbackContext.success("Action: " + action);
         } else {
-            callback.error("Invalid action: " + action);
+            callbackContext.error("Invalid action: " + action);
         }
 
         return validAction;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) 
+    {
+        if( requestCode == MY_OP )
+        {
+            if( resultCode == Activity.RESULT_OK && data.hasExtra("return_val") )
+            {
+                PluginResult result = new PluginResult(PluginResult.Status.OK, data.getStringExtra("return_val"));
+                result.setKeepCallback(true);
+                callback.sendPluginResult(result);
+            }
+            else
+            {
+                PluginResult result = new PluginResult(PluginResult.Status.ERROR, "no params returned successfully" );
+                result.setKeepCallback(true);
+                callback.sendPluginResult(result);
+            }
+        }
     }
 
     /**
@@ -137,7 +160,7 @@ public class snBatteryOptimization extends CordovaPlugin {
      * Requires permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS to function.
      */
     @SuppressLint("BatteryLife")
-    private void disableBatteryOptimizations(CallbackContext callback)
+    private void disableBatteryOptimizations()
     {   
         try {
             Activity activity = cordova.getActivity();
@@ -150,12 +173,14 @@ public class snBatteryOptimization extends CordovaPlugin {
 
             if (pm.isIgnoringBatteryOptimizations(pkgName))
                 return;
-
+         
+            cordova.setActivityResultCallback(this);
             intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             intent.setData(Uri.parse("package:" + pkgName));
-            cordova.getActivity().startActivity(intent);
+            //cordova.getActivity().startActivity(intent);
+            cordova.startActivityForResult(this, intent, MY_OP);
 
-            callback.success("Action: Battery optimization sucess");
+            //callback.success("Action: Battery optimization sucess");
         } catch (Exception e) {
             callback.error("N/A");
         }
