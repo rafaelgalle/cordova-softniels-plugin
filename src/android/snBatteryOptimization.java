@@ -86,7 +86,7 @@ public class snBatteryOptimization extends CordovaPlugin {
         switch (action)
         {
             case "battery":
-                disableBatteryOptimizations();
+                disableBatteryOptimizations(callback);
                 break;
             case "webview":
                 disableWebViewOptimizations();
@@ -96,7 +96,7 @@ public class snBatteryOptimization extends CordovaPlugin {
         }
 
         if (validAction) {
-            callback.success("Action: " + action);
+            //callback.success("Action: " + action);
         } else {
             callback.error("Invalid action: " + action);
         }
@@ -137,22 +137,28 @@ public class snBatteryOptimization extends CordovaPlugin {
      * Requires permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS to function.
      */
     @SuppressLint("BatteryLife")
-    private void disableBatteryOptimizations()
-    {
-        Activity activity = cordova.getActivity();
-        Intent intent     = new Intent();
-        String pkgName    = activity.getPackageName();
-        PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
+    private void disableBatteryOptimizations(CallbackContext callback)
+    {   
+        try {
+            Activity activity = cordova.getActivity();
+            Intent intent     = new Intent();
+            String pkgName    = activity.getPackageName();
+            PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
 
-        if (SDK_INT < M)
-            return;
+            if (SDK_INT < M)
+                return;
 
-        if (pm.isIgnoringBatteryOptimizations(pkgName))
-            return;
+            if (pm.isIgnoringBatteryOptimizations(pkgName))
+                return;
 
-        intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-        intent.setData(Uri.parse("package:" + pkgName));
-        cordova.getActivity().startActivity(intent);
+            intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setData(Uri.parse("package:" + pkgName));
+            cordova.getActivity().startActivity(intent);
+
+            callback.success("Action: Battery optimization sucess");
+        } catch (Exception e) {
+            callback.error("N/A");
+        }
     }
     
     /**
