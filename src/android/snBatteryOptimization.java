@@ -112,9 +112,9 @@ public class snBatteryOptimization extends CordovaPlugin {
     {
         if( requestCode == MY_OP )
         {
-            if( resultCode == Activity.RESULT_OK && data.hasExtra("return_val") )
+            if( resultCode == Activity.RESULT_OK )
             {
-                PluginResult result = new PluginResult(PluginResult.Status.OK, data.getStringExtra("return_val"));
+                PluginResult result = new PluginResult(PluginResult.Status.OK, "battery optimization sucess");
                 result.setKeepCallback(true);
                 callback.sendPluginResult(result);
             }
