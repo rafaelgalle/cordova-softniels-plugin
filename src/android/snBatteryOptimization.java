@@ -169,12 +169,12 @@ public class snBatteryOptimization extends CordovaPlugin {
             PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
 
             if (SDK_INT < M){
-                callback.success("Action: Battery optimization sucess SDK");
+                callback.success("Action: Battery optimization sucess: MIN SDK");
                 return;
             }
 
             if (pm.isIgnoringBatteryOptimizations(pkgName)){
-                callback.success("Action: Battery optimization sucess JA TA");
+                callback.success("Action: Battery optimization sucess: already has");
                 return;
             }
          
