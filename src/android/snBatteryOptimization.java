@@ -227,14 +227,14 @@ public class snBatteryOptimization extends CordovaPlugin {
     private void moveToForeground2() {
         try {
             Activity activity = cordova.getActivity();
-            Intent intent     = new Intent();
+            Intent intent     = new Intent(Intent.ACTION_MAIN);
             String pkgName    = activity.getPackageName();
             PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
          
             //intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             intent.setData(Uri.parse("package:" + pkgName));
             //intent.setPackage('br.com.caltec.fretes');
-            intent.setSelector(android.intent.action.MAIN);
+            //intent.setSelector(android.intent.action.MAIN);
             //cordova.getActivity().startActivity(intent);
             intent.addFlags(
                             Intent.FLAG_ACTIVITY_SINGLE_TOP |
