@@ -173,7 +173,7 @@ public class snBatteryOptimization extends CordovaPlugin {
          
             //intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             intent.setData(Uri.parse("package:" + pkgName));
-            intent.setPackage('br.com.caltec.fretes');
+            intent.setPackage(Uri.parse(pkgName));
             //intent.setSelector(ACTION_MAIN);            
             //cordova.getActivity().startActivity(intent);
             intent.addFlags(
@@ -285,7 +285,7 @@ public class snBatteryOptimization extends CordovaPlugin {
          
             //intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             //intent.setData(Uri.parse("package:" + pkgName));
-            intent.setPackage('br.com.caltec.fretes');
+            intent.setPackage(Uri.parse(pkgName));
             //intent.setSelector(ACTION_MAIN);            
             //cordova.getActivity().startActivity(intent);
             intent.addFlags(
