@@ -157,8 +157,9 @@ public class snBatteryOptimization extends CordovaPlugin {
         // }
         try {
             Activity  app = getApp();
-            Intent intent = getLaunchIntent();        
-
+            Intent intent = getLaunchIntent();
+            String pkgName    = app.getPackageName();
+            intent.setData(Uri.parse("package:" + pkgName));
             intent.addFlags(
                     Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
                     Intent.FLAG_ACTIVITY_SINGLE_TOP);
