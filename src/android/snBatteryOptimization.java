@@ -133,38 +133,41 @@ public class snBatteryOptimization extends CordovaPlugin {
     }
 
     private void moveToForeground() {
-        try {
-            Activity activity = cordova.getActivity();
-            Intent intent     = new Intent();
-            String pkgName    = activity.getPackageName();
+        // try {
+        //     Activity activity = cordova.getActivity();
+        //     Intent intent     = new Intent();
+        //     String pkgName    = activity.getPackageName();
 
-            // intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-            //intent.setAction(ACTION_SCREEN_ON);
-            intent.setData(Uri.parse("package:" + pkgName));
-                // Intent.FLAG_ACTIVITY_CLEAR_TOP |
+        //     // intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+        //     //intent.setAction(ACTION_SCREEN_ON);
+        //     intent.setData(Uri.parse("package:" + pkgName));
+        //         // Intent.FLAG_ACTIVITY_CLEAR_TOP |
+        //     intent.addFlags(
+        //         Intent.FLAG_ACTIVITY_SINGLE_TOP |
+        //         Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        //         // Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
+        //         // Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
+        //         // Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        //     //cordova.getActivity().startActivity(intent);
+        //     cordova.startActivityForResult(this, intent, MY_OP);
+        //     //cordova.getActivity().startActivity(intent);
+        //     callback.success("Action: TESTE INTENT OK");
+        // } catch (Exception e) {
+        //     callback.error("TESTE INTENT ERRO N/A: " + e);
+        // }
+        try {
+            Activity  app = getApp();
+            Intent intent = getLaunchIntent();        
+
             intent.addFlags(
-                Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                // Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
-                // Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
-                // Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            //cordova.getActivity().startActivity(intent);
-            cordova.startActivityForResult(this, intent, MY_OP);
-            //cordova.getActivity().startActivity(intent);
+                    Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+            app.startActivity(intent);
             callback.success("Action: TESTE INTENT OK");
         } catch (Exception e) {
             callback.error("TESTE INTENT ERRO N/A: " + e);
         }
-
-
-        // Activity  app = getApp();
-        // Intent intent = getLaunchIntent();
-
-        // intent.addFlags(
-        //         Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
-        //         Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
-        // app.startActivity(intent);
     }
 
     /**
