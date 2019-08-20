@@ -53,6 +53,7 @@ import static android.content.pm.PackageManager.MATCH_DEFAULT_ONLY;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
 import static android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS;
+//android.intent.action.MAIN
 //import static android.provider.Settings.ACTION_SCREEN_ON;
 //import static android.view.WindowManager.LayoutParams.FLAG_ACTIVITY_CLEAR_TOP;
 //import static android.view.WindowManager.LayoutParams.FLAG_ACTIVITY_NEW_TASK;
@@ -233,7 +234,7 @@ public class snBatteryOptimization extends CordovaPlugin {
             //intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             intent.setData(Uri.parse("package:" + pkgName));
             //intent.setPackage('br.com.caltec.fretes');
-            intent.setSelector("ACTION_MAIN");
+            intent.setSelector(android.intent.action.MAIN);
             //cordova.getActivity().startActivity(intent);
             intent.addFlags(
                             Intent.FLAG_ACTIVITY_SINGLE_TOP |
