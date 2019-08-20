@@ -173,13 +173,14 @@ public class snBatteryOptimization extends CordovaPlugin {
          
             //intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             intent.setData(Uri.parse("package:" + pkgName));
+            intent.setPackage(pkgName);
             //cordova.getActivity().startActivity(intent);
             intent.addFlags(
                             Intent.FLAG_ACTIVITY_SINGLE_TOP |
                             Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             cordova.startActivityForResult(this, intent, MY_OP);
 
-            //callback.success("Action: Battery optimization sucess");
+            callback.success("Action: Battery optimization sucess");
         } catch (Exception e) {
             callback.error("N/A");
         }
