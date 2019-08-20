@@ -6,5 +6,7 @@ exports.disableBatteryOptimizations = function(arg0, success, error)
 };
 exports.moveToForeground = function(arg0, success, error)
 {
+	console.log('vai chamar java');
 	exec(success, error, "snBatteryOptimization", "foreground", []);
+	console.log('passou vai chamar java');
 };
