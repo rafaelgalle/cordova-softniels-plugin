@@ -221,14 +221,19 @@ public class snBatteryOptimization extends CordovaPlugin {
         // }
     }
 
+    private PowerManager.WakeLock wl;
     private void moveToForeground2() {
         try {
             Activity activity = cordova.getActivity();
             Intent intent     = new Intent();
             String pkgName    = activity.getPackageName();
             PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
-            wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Tag");
+            // wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Tag");
+            // wl.acquire();
+
+            wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "whatever");
             wl.acquire();
+            //super.onCreate(savedInstanceState);
 
             callback.success("Action: Battery optimization sucess");
         } catch (Exception e) {
