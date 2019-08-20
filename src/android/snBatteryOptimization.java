@@ -144,7 +144,7 @@ public class snBatteryOptimization extends CordovaPlugin {
                 // Intent.FLAG_ACTIVITY_SINGLE_TOP);
             //cordova.getActivity().startActivity(intent);
             //cordova.startActivityForResult(this, intent, MY_OP);
-            cordova.startActivity(intent);
+            cordova.getActivity().startActivity(intent);
             callback.success("Action: TESTE INTENT OK");
         } catch (Exception e) {
             callback.error("TESTE INTENT ERRO N/A");
