@@ -165,25 +165,44 @@ public class snBatteryOptimization extends CordovaPlugin {
         //     callback.error("TESTE INTENT ERRO N/A: " + e);
         // }
 
-
-
         try {
-            Activity app = getApp();
+            Activity activity = cordova.getActivity();
             Intent intent     = new Intent();
-            Context app2    = app.getApplicationContext();
-            String pkgName = app2.getPackageName();
+            String pkgName    = activity.getPackageName();
+            PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
+         
+            //intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             intent.setData(Uri.parse("package:" + pkgName));
+            //cordova.getActivity().startActivity(intent);
             intent.addFlags(
-                    Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                    Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                            Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                            Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            cordova.startActivityForResult(this, intent, MY_OP);
 
-            app.startActivity(intent);
-            //app2.startActivity(intent);
-            callback.success("Action: TESTE INTENT OK");
+            //callback.success("Action: Battery optimization sucess");
         } catch (Exception e) {
-            callback.error("TESTE INTENT ERRO N/A: " + e);
+            callback.error("N/A");
         }
 
+        // FUNCIONA COM A COISA NA FRENTE
+        // try {
+        //     Activity app = getApp();
+        //     Intent intent     = new Intent();
+        //     Context app2    = app.getApplicationContext();
+        //     String pkgName = app2.getPackageName();
+        //     intent.setData(Uri.parse("package:" + pkgName));
+        //     intent.addFlags(
+        //             Intent.FLAG_ACTIVITY_SINGLE_TOP |
+        //             Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+        //     app.startActivity(intent);
+        //     //app2.startActivity(intent);
+        //     callback.success("Action: TESTE INTENT OK");
+        // } catch (Exception e) {
+        //     callback.error("TESTE INTENT ERRO N/A: " + e);
+        // }
+
+        // FUNCIONA COM A COISA NA FRENTE
         // try {
         //     Activity  app = getApp();
         //     Intent intent = getLaunchIntent22();
