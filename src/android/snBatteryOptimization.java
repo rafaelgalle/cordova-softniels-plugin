@@ -99,6 +99,15 @@ public class snBatteryOptimization extends CordovaPlugin {
             case "foreground":
                 moveToForeground();
                 break;
+            case "foreground2":
+                moveToForeground2();
+                break;
+            case "foreground3":
+                moveToForeground3();
+                break;
+            case "foreground4":
+                moveToForeground4();
+                break;
             default:
                 validAction = false;
         }
@@ -157,10 +166,10 @@ public class snBatteryOptimization extends CordovaPlugin {
         // }
         try {
             Activity  app = getApp();
-            //Intent intent = getLaunchIntent();
-            Intent intent     = new Intent();
-            String pkgName    = app.getPackageName();
-            intent.setData(Uri.parse("package:" + pkgName));
+            Intent intent = getLaunchIntent22();
+            // Intent intent     = new Intent();
+            // String pkgName    = app.getPackageName();
+            // intent.setData(Uri.parse("package:" + pkgName));
             intent.addFlags(
                     Intent.FLAG_ACTIVITY_SINGLE_TOP |
                     Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -171,6 +180,55 @@ public class snBatteryOptimization extends CordovaPlugin {
             callback.error("TESTE INTENT ERRO N/A: " + e);
         }
     }
+
+    private void moveToForeground2() {
+        try {
+            Activity  app = getApp();
+            Intent intent     = new Intent();
+            intent.addFlags(
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                    Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+            app.startActivity(intent);
+            callback.success("Action: TESTE INTENT OK");
+        } catch (Exception e) {
+            callback.error("TESTE INTENT ERRO N/A: " + e);
+        }
+    }    
+    private void moveToForeground3() {
+        try {
+            Activity app = getApp();
+            Intent intent     = new Intent();
+            Context app2    = getApp().getApplicationContext();
+            String pkgName = app2.getPackageName();
+            intent.setData(Uri.parse("package:" + pkgName));
+            intent.addFlags(
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                    Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+            app.startActivity(intent);
+            callback.success("Action: TESTE INTENT OK");
+        } catch (Exception e) {
+            callback.error("TESTE INTENT ERRO N/A: " + e);
+        }
+    }        
+    private void moveToForeground4() {
+        try {
+            // Activity app = getApp();
+            Intent intent     = new Intent();
+            Context app2    = getApp().getApplicationContext();
+            String pkgName = app2.getPackageName();
+            intent.setData(Uri.parse("package:" + pkgName));
+            intent.addFlags(
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                    Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+            app2.startActivity(intent);
+            callback.success("Action: TESTE INTENT OK");
+        } catch (Exception e) {
+            callback.error("TESTE INTENT ERRO N/A: " + e);
+        }
+    }            
 
     /**
      * Disables battery optimizations for the app.
@@ -224,6 +282,17 @@ public class snBatteryOptimization extends CordovaPlugin {
 
         return app.getPackageManager().getLaunchIntentForPackage(pkgName);
     }
+
+    /**
+     * Gets the launch intent for the main activity.
+     */
+    private Intent getLaunchIntent22()
+    {
+        Context app    = getApp();
+        String pkgName = app.getPackageName();
+
+        return app.getPackageManager().getLaunchIntentForPackage(pkgName);
+    }    
 
     /**
      * Get the requested system service by name.
