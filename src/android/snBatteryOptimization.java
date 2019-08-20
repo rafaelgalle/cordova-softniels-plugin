@@ -91,8 +91,8 @@ public class snBatteryOptimization extends CordovaPlugin {
             case "battery":
                 disableBatteryOptimizations();
                 break;
-            case "webview":
-                disableWebViewOptimizations();
+            case "foreground":
+                moveToForeground();
                 break;
             default:
                 validAction = false;
@@ -127,32 +127,38 @@ public class snBatteryOptimization extends CordovaPlugin {
         }
     }
 
-    /**
-     * Enable GPS position tracking while in background.
-     */
-    private void disableWebViewOptimizations() {
-        Thread thread = new Thread(){
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                    getApp().runOnUiThread(() -> {
-                        View view = webView.getEngine().getView();
+    private void moveToForeground() {
+        try {
+            Activity activity = cordova.getActivity();
+            Intent intent     = new Intent();
+            String pkgName    = activity.getPackageName();
 
-                        try {
-                            Class.forName("org.crosswalk.engine.XWalkCordovaView")
-                                 .getMethod("onShow")
-                                 .invoke(view);
-                        } catch (Exception e){
-                            view.dispatchWindowVisibilityChanged(View.VISIBLE);
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    // do nothing
-                }
-            }
-        };
+            // intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setAction(ACTION_SCREEN_ON);
+            intent.setData(Uri.parse("package:" + pkgName));
+            intent.addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                Intent.FLAG_ACTIVITY_NEW_TASK);
+                // Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
+                // Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
+                // Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            //cordova.getActivity().startActivity(intent);
+            //cordova.startActivityForResult(this, intent, MY_OP);
+            cordova.startActivity(intent);
+            callback.success("Action: TESTE INTENT OK");
+        } catch (Exception e) {
+            callback.error("TESTE INTENT ERRO N/A");
+        }
 
-        thread.start();
+
+        // Activity  app = getApp();
+        // Intent intent = getLaunchIntent();
+
+        // intent.addFlags(
+        //         Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
+        //         Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        // app.startActivity(intent);
     }
 
     /**
