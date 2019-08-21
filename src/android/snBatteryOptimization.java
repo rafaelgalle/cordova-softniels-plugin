@@ -172,7 +172,7 @@ public class snBatteryOptimization extends CordovaPlugin {
             String pkgName    = activity.getPackageName();
             //PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
          
-            //intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             intent.setData(Uri.parse("package:" + pkgName));
             //intent.setPackage("br.com.caltec.fretes");
             //intent.setSelector(ACTION_MAIN);            
