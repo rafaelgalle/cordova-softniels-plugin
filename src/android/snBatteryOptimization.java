@@ -52,7 +52,6 @@ import static android.content.Context.POWER_SERVICE;
 import static android.content.pm.PackageManager.MATCH_DEFAULT_ONLY;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
-import static android.provider.Settings.ACTION_VIEW;
 import static android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS;
 //android.intent.action.MAIN
 //import static android.provider.Settings.ACTION_SCREEN_ON;
@@ -249,7 +248,7 @@ public class snBatteryOptimization extends CordovaPlugin {
             Intent intent     = new Intent();
             String pkgName    = activity.getPackageName();
          
-            intent.setAction(ACTION_VIEW); // tentar com ACTION_VIEW
+            //intent.setAction(ACTION_VIEW); // tentar com ACTION_VIEW
             intent.setData(Uri.parse("package:" + pkgName));
             intent.addFlags(
                 Intent.FLAG_ACTIVITY_SINGLE_TOP |
