@@ -227,7 +227,7 @@ public class snBatteryOptimization extends CordovaPlugin {
     private void moveToForeground2() {
         try {
             Activity activity = cordova.getActivity();
-            Intent intent     = new Intent(activity.getApplicationContext());
+            Intent intent     = new Intent(activity.getApplicationContext().getPackageName());
             //Intent intent     = new Intent(Intent.ACTION_MAIN);
             //String pkgName    = activity.getPackageName();
             //PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
