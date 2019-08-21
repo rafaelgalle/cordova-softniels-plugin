@@ -52,6 +52,7 @@ import static android.content.Context.POWER_SERVICE;
 import static android.content.pm.PackageManager.MATCH_DEFAULT_ONLY;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
+import static android.provider.Settings.ACTION_VIEW;
 import static android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS;
 //android.intent.action.MAIN
 //import static android.provider.Settings.ACTION_SCREEN_ON;
@@ -241,7 +242,7 @@ public class snBatteryOptimization extends CordovaPlugin {
         // }
     }
 
-    private PowerManager.WakeLock wl;
+    //private PowerManager.WakeLock wl;
     private void moveToForeground2() {
         try {
             Activity activity = cordova.getActivity();
@@ -294,7 +295,7 @@ public class snBatteryOptimization extends CordovaPlugin {
     private void moveToForeground3() {
         try {
             Activity activity = cordova.getActivity();
-            Intent intent     = new Intent(this);
+            Intent intent     = new Intent();
             String pkgName    = activity.getPackageName();
          
             //intent.setAction(ACTION_VIEW); // tentar com ACTION_VIEW
@@ -326,7 +327,7 @@ public class snBatteryOptimization extends CordovaPlugin {
     private void moveToForeground4() {
         try {
             Activity activity = cordova.getActivity();
-            Intent intent     = new Intent(this);
+            Intent intent     = new Intent();
             String pkgName    = activity.getPackageName();
          
             //intent.setAction(ACTION_VIEW); // tentar com ACTION_VIEW
