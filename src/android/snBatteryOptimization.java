@@ -100,15 +100,6 @@ public class snBatteryOptimization extends CordovaPlugin {
             case "foreground":
                 moveToForeground();
                 break;
-            case "foreground2":
-                moveToForeground2();
-                break;
-            case "foreground3":
-                moveToForeground3();
-                break;
-            case "foreground4":
-                moveToForeground4();
-                break;
             default:
                 validAction = false;
         }
@@ -143,51 +134,6 @@ public class snBatteryOptimization extends CordovaPlugin {
     }
 
     private void moveToForeground() {
-        // try {
-        //     Activity activity = cordova.getActivity();
-        //     Intent intent     = new Intent();
-        //     String pkgName    = activity.getPackageName();
-
-        //     // intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-        //     //intent.setAction(ACTION_SCREEN_ON);
-        //     intent.setData(Uri.parse("package:" + pkgName));
-        //         // Intent.FLAG_ACTIVITY_CLEAR_TOP |
-        //     intent.addFlags(
-        //         Intent.FLAG_ACTIVITY_SINGLE_TOP |
-        //         Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        //         // Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
-        //         // Intent.FLAG_ACTIVITY_REORDER_TO_FRONT |
-        //         // Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        //     //cordova.getActivity().startActivity(intent);
-        //     cordova.startActivityForResult(this, intent, MY_OP);
-        //     //cordova.getActivity().startActivity(intent);
-        //     callback.success("Action: TESTE INTENT OK");
-        // } catch (Exception e) {
-        //     callback.error("TESTE INTENT ERRO N/A: " + e);
-        // }
-
-
-                                // try {
-                                //     Activity activity = cordova.getActivity();
-                                //     Intent intent     = new Intent();
-                                //     String pkgName    = activity.getPackageName();
-                                //     //PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
-                                 
-                                //     intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS); // tentar com ACTION_VIEW
-                                //     intent.setData(Uri.parse("package:" + pkgName));
-                                //     //intent.setPackage("br.com.caltec.fretes");
-                                //     //intent.setSelector(ACTION_MAIN);            
-                                //     //cordova.getActivity().startActivity(intent);
-                                //     intent.addFlags(
-                                //                     Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                                //                     Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                                //     activity.startActivity(intent);
-
-                                //     callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
-                                // } catch (Exception e) {
-                                //     callback.error("N/A: " + e);
-                                // }
-
         try {
             Activity activity = cordova.getActivity();
             Intent intent     = new Intent();
@@ -199,177 +145,13 @@ public class snBatteryOptimization extends CordovaPlugin {
                 Intent.FLAG_ACTIVITY_SINGLE_TOP |
                 Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
-            activity.startActivity(intent);
-            callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
+            // activity.startActivity(intent);
+            // callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
+            cordova.startActivityForResult(this, intent, MY_OP);
         } catch (Exception e) {
             callback.error("N/A: " + e);
         }
-
-        // FUNCIONA COM A COISA NA FRENTE
-        // try {
-        //     Activity app = getApp();
-        //     Intent intent     = new Intent();
-        //     Context app2    = app.getApplicationContext();
-        //     String pkgName = app2.getPackageName();
-        //     intent.setData(Uri.parse("package:" + pkgName));
-        //     intent.addFlags(
-        //             Intent.FLAG_ACTIVITY_SINGLE_TOP |
-        //             Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
-        //     app.startActivity(intent);
-        //     //app2.startActivity(intent);
-        //     callback.success("Action: TESTE INTENT OK");
-        // } catch (Exception e) {
-        //     callback.error("TESTE INTENT ERRO N/A: " + e);
-        // }
-
-        // FUNCIONA COM A COISA NA FRENTE
-        // try {
-        //     Activity  app = getApp();
-        //     Intent intent = getLaunchIntent22();
-        //     // Intent intent     = new Intent();
-        //     // String pkgName    = app.getPackageName();
-        //     // intent.setData(Uri.parse("package:" + pkgName));
-        //     intent.addFlags(
-        //             Intent.FLAG_ACTIVITY_SINGLE_TOP |
-        //             Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
-        //     app.startActivity(intent);
-        //     callback.success("Action: TESTE INTENT OK");
-        // } catch (Exception e) {
-        //     callback.error("TESTE INTENT ERRO N/A: " + e);
-        // }
     }
-
-    //private PowerManager.WakeLock wl;
-    private void moveToForeground2() {
-        try {
-            Activity activity = cordova.getActivity();
-            Intent intent     = new Intent();
-            String pkgName    = activity.getPackageName();
-         
-            //intent.setAction(ACTION_VIEW); // tentar com ACTION_VIEW
-            intent.setData(Uri.parse("package:" + pkgName));
-            intent.addFlags(
-                Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
-            activity.startActivity(intent);
-            callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
-        } catch (Exception e) {
-            callback.error("N/A: " + e);
-        }      
-        // try {
-        //     Activity activity = cordova.getActivity();
-        //     Intent intent     = new Intent();
-        //     String pkgName    = activity.getPackageName();
-        //     PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
-        //     // wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, "My Tag");
-        //     // wl.acquire();
-
-        //     wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "whatever");
-        //     wl.acquire();
-        //     //super.onCreate(savedInstanceState);
-
-        //     callback.success("Action: Battery optimization sucess");
-        // } catch (Exception e) {
-        //     callback.error("N/A: " + e);
-        // }        
-        // try {
-        //     Activity  app = getApp();
-        //     Intent intent     = new Intent();
-        //     String pkgName    = app.getPackageName();
-        //     intent.setData(Uri.parse("package:" + pkgName));
-        //     intent.addFlags(
-        //             Intent.FLAG_ACTIVITY_NEW_TASK |
-        //             Intent.FLAG_ACTIVITY_SINGLE_TOP |
-        //             Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
-        //     app.startActivity(intent);
-        //     callback.success("Action: TESTE INTENT OK");
-        // } catch (Exception e) {
-        //     callback.error("TESTE INTENT ERRO N/A: " + e);
-        // }
-    }    
-    private void moveToForeground3() {
-        try {
-            Activity activity = cordova.getActivity();
-            Intent intent     = new Intent();
-            String pkgName    = activity.getPackageName();
-         
-            //intent.setAction(ACTION_VIEW); // tentar com ACTION_VIEW
-            intent.setData(Uri.parse("package:" + pkgName));
-            intent.addFlags(
-                Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
-            activity.startActivity(intent);
-            callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
-        } catch (Exception e) {
-            callback.error("N/A: " + e);
-        }         
-        // try {
-        //     Activity app = getApp();
-        //     Intent intent = new Intent();
-        //     String pkgName = app.getPackageName();
-        //     intent.setData(Uri.parse("package:" + pkgName));
-        //     intent.setPackage(pkgName);
-        //     intent.addFlags(
-        //             Intent.FLAG_ACTIVITY_SINGLE_TOP |
-        //             Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        //     app.startActivity(intent);
-        //     callback.success("Action: TESTE INTENT OK");
-        // } catch (Exception e) {
-        //     callback.error("TESTE INTENT ERRO N/A: " + e);
-        // }
-    }        
-    private void moveToForeground4() {
-        try {
-            Activity activity = cordova.getActivity();
-            Intent intent     = new Intent();
-            String pkgName    = activity.getPackageName();
-         
-            //intent.setAction(ACTION_VIEW); // tentar com ACTION_VIEW
-            //intent.setData(Uri.parse("package:" + pkgName));
-            intent.addFlags(
-                Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-
-            activity.startActivity(intent);
-            callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
-        } catch (Exception e) {
-            callback.error("N/A: " + e);
-        }    
-        // try {
-        //     Activity app = getApp();
-        //     Intent intent = new Intent();
-        //     String pkgName = app.getApplicationContext().getPackageName();
-        //     intent.setData(Uri.parse("package:" + pkgName));
-        //     intent.setPackage(pkgName);
-        //     intent.addFlags(
-        //             Intent.FLAG_ACTIVITY_SINGLE_TOP |
-        //             Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        //     app.startActivity(intent);
-        //     callback.success("Action: TESTE INTENT OK");
-        // } catch (Exception e) {
-        //     callback.error("TESTE INTENT ERRO N/A: " + e);
-        // }        
-        // try {
-        //     // Activity app = getApp();
-        //     Intent intent     = new Intent();
-        //     Context app2    = getApp().getApplicationContext();
-        //     String pkgName = app2.getPackageName();
-        //     intent.setData(Uri.parse("package:" + pkgName));
-        //     intent.addFlags(
-        //             Intent.FLAG_ACTIVITY_NEW_TASK |
-        //             Intent.FLAG_ACTIVITY_SINGLE_TOP |
-        //             Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        //     app2.startActivity(intent);
-        //     callback.success("Action: TESTE INTENT OK");
-        // } catch (Exception e) {
-        //     callback.error("TESTE INTENT ERRO N/A: " + e);
-        // }
-    }            
 
     /**
      * Disables battery optimizations for the app.
@@ -423,17 +205,6 @@ public class snBatteryOptimization extends CordovaPlugin {
 
         return app.getPackageManager().getLaunchIntentForPackage(pkgName);
     }
-
-    /**
-     * Gets the launch intent for the main activity.
-     */
-    private Intent getLaunchIntent22()
-    {
-        Context app    = getApp();
-        String pkgName = app.getPackageName();
-
-        return app.getPackageManager().getLaunchIntentForPackage(pkgName);
-    }    
 
     /**
      * Get the requested system service by name.
