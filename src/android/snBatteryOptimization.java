@@ -53,10 +53,7 @@ import static android.content.pm.PackageManager.MATCH_DEFAULT_ONLY;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.M;
 import static android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS;
-//android.intent.action.MAIN
-//import static android.provider.Settings.ACTION_SCREEN_ON;
-//import static android.view.WindowManager.LayoutParams.FLAG_ACTIVITY_CLEAR_TOP;
-//import static android.view.WindowManager.LayoutParams.FLAG_ACTIVITY_NEW_TASK;
+
 import static android.view.WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON;
 import static android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD;
 import static android.view.WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED;
@@ -139,17 +136,16 @@ public class snBatteryOptimization extends CordovaPlugin {
             Intent intent     = new Intent();
             String pkgName    = activity.getPackageName();
          
-            intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS); // tentar com ACTION_VIEW
+            intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
             intent.setData(Uri.parse("package:" + pkgName));
             intent.addFlags(
                 Intent.FLAG_ACTIVITY_SINGLE_TOP |
                 Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
             activity.startActivity(intent);
-            callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
-            //cordova.startActivityForResult(this, intent, MY_OP);
+            callback.success("Sucess in action: moveToForeground");
         } catch (Exception e) {
-            callback.error("N/A: " + e);
+            callback.error("Erro in action: moveToForeground: " + e);
         }
     }
 
