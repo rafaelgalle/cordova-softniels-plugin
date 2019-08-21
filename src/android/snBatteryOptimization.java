@@ -166,22 +166,40 @@ public class snBatteryOptimization extends CordovaPlugin {
         //     callback.error("TESTE INTENT ERRO N/A: " + e);
         // }
 
+
+                                // try {
+                                //     Activity activity = cordova.getActivity();
+                                //     Intent intent     = new Intent();
+                                //     String pkgName    = activity.getPackageName();
+                                //     //PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
+                                 
+                                //     intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS); // tentar com ACTION_VIEW
+                                //     intent.setData(Uri.parse("package:" + pkgName));
+                                //     //intent.setPackage("br.com.caltec.fretes");
+                                //     //intent.setSelector(ACTION_MAIN);            
+                                //     //cordova.getActivity().startActivity(intent);
+                                //     intent.addFlags(
+                                //                     Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                                //                     Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                //     activity.startActivity(intent);
+
+                                //     callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
+                                // } catch (Exception e) {
+                                //     callback.error("N/A: " + e);
+                                // }
+
         try {
             Activity activity = cordova.getActivity();
             Intent intent     = new Intent();
             String pkgName    = activity.getPackageName();
-            //PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
          
-            intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS); // tentar com ACTION_VIEW
             intent.setData(Uri.parse("package:" + pkgName));
-            //intent.setPackage("br.com.caltec.fretes");
-            //intent.setSelector(ACTION_MAIN);            
-            //cordova.getActivity().startActivity(intent);
             intent.addFlags(
-                            Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                            Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            cordova.startActivityForResult(this, intent, MY_OP);
+                Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
+            activity.startActivity(intent);
             callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
         } catch (Exception e) {
             callback.error("N/A: " + e);
@@ -227,26 +245,20 @@ public class snBatteryOptimization extends CordovaPlugin {
     private void moveToForeground2() {
         try {
             Activity activity = cordova.getActivity();
-            Intent intent     = new Intent(activity.getApplicationContext().getPackageName());
-            //Intent intent     = new Intent(Intent.ACTION_MAIN);
-            //String pkgName    = activity.getPackageName();
-            //PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
-
-            //intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-            //intent.setData(Uri.parse("package:" + pkgName));
-            //intent.setPackage('br.com.caltec.fretes');
-            //intent.setSelector(android.intent.action.MAIN);
-            //cordova.getActivity().startActivity(intent);
+            Intent intent     = new Intent();
+            String pkgName    = activity.getPackageName();
+         
+            intent.setAction(ACTION_VIEW); // tentar com ACTION_VIEW
+            intent.setData(Uri.parse("package:" + pkgName));
             intent.addFlags(
-                            Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                            Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            //cordova.startActivityForResult(this, intent, MY_OP);
-            activity.startActivity(intent);
+                Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
-            callback.success("Action: Battery optimization sucess"  + " : activity : " + activity);
+            activity.startActivity(intent);
+            callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
         } catch (Exception e) {
             callback.error("N/A: " + e);
-        }        
+        }      
         // try {
         //     Activity activity = cordova.getActivity();
         //     Intent intent     = new Intent();
@@ -282,25 +294,20 @@ public class snBatteryOptimization extends CordovaPlugin {
     private void moveToForeground3() {
         try {
             Activity activity = cordova.getActivity();
-            Intent intent     = new Intent();
-            //String pkgName    = activity.getPackageName();
-            //PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
+            Intent intent     = new Intent(this);
+            String pkgName    = activity.getPackageName();
          
-            //intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-            //intent.setData(Uri.parse("package:" + pkgName));
-            intent.setPackage("br.com.caltec.fretes");
-            //intent.setSelector(ACTION_MAIN);            
-            //cordova.getActivity().startActivity(intent);
+            //intent.setAction(ACTION_VIEW); // tentar com ACTION_VIEW
+            intent.setData(Uri.parse("package:" + pkgName));
             intent.addFlags(
-                            Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                            Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            //cordova.startActivityForResult(this, intent, MY_OP);
-            activity.startActivity(intent);
+                Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
-            callback.success("Action: Battery optimization sucess: intent: " + intent  + " : activity : " + activity);
+            activity.startActivity(intent);
+            callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
         } catch (Exception e) {
             callback.error("N/A: " + e);
-        }        
+        }         
         // try {
         //     Activity app = getApp();
         //     Intent intent = new Intent();
@@ -319,24 +326,20 @@ public class snBatteryOptimization extends CordovaPlugin {
     private void moveToForeground4() {
         try {
             Activity activity = cordova.getActivity();
-            Intent intent     = new Intent();
-            String pkgName    = activity.getApplicationContext().getPackageName();
-            //PowerManager pm   = (PowerManager)getService(POWER_SERVICE);
+            Intent intent     = new Intent(this);
+            String pkgName    = activity.getPackageName();
          
-            //intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            //intent.setAction(ACTION_VIEW); // tentar com ACTION_VIEW
             //intent.setData(Uri.parse("package:" + pkgName));
-            intent.setPackage(pkgName);
-            //intent.setSelector(ACTION_MAIN);            
-            //cordova.getActivity().startActivity(intent);
             intent.addFlags(
-                            Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                            Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            activity.startActivity(intent);
+                Intent.FLAG_ACTIVITY_SINGLE_TOP |
+                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 
-            callback.success("Action: Battery optimization sucess: " + pkgName  + " : activity : " + activity);
+            activity.startActivity(intent);
+            callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
         } catch (Exception e) {
             callback.error("N/A: " + e);
-        }
+        }    
         // try {
         //     Activity app = getApp();
         //     Intent intent = new Intent();
