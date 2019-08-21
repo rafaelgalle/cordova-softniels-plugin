@@ -184,7 +184,7 @@ public class snBatteryOptimization extends CordovaPlugin {
 
             callback.success("Action: Battery optimization sucess: " + pkgName + " : activity : " + activity);
         } catch (Exception e) {
-            callback.error("N/A: " + e + " : " + pkgName + " : activity : " + activity);
+            callback.error("N/A: " + e);
         }
 
         // FUNCIONA COM A COISA NA FRENTE
@@ -245,7 +245,7 @@ public class snBatteryOptimization extends CordovaPlugin {
 
             callback.success("Action: Battery optimization sucess"  + " : activity : " + activity);
         } catch (Exception e) {
-            callback.error("N/A: " + e  + " : activity : " + activity);
+            callback.error("N/A: " + e);
         }        
         // try {
         //     Activity activity = cordova.getActivity();
@@ -299,7 +299,7 @@ public class snBatteryOptimization extends CordovaPlugin {
 
             callback.success("Action: Battery optimization sucess: intent: " + intent  + " : activity : " + activity);
         } catch (Exception e) {
-            callback.error("N/A: " + e + " : intent: " + intent  + " : activity : " + activity);
+            callback.error("N/A: " + e);
         }        
         // try {
         //     Activity app = getApp();
@@ -335,7 +335,7 @@ public class snBatteryOptimization extends CordovaPlugin {
 
             callback.success("Action: Battery optimization sucess: " + pkgName  + " : activity : " + activity);
         } catch (Exception e) {
-            callback.error("N/A: " + e + " : " + pkgName  + " : activity : " + activity);
+            callback.error("N/A: " + e);
         }
         // try {
         //     Activity app = getApp();
