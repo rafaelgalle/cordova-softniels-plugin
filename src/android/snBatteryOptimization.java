@@ -140,7 +140,7 @@ public class snBatteryOptimization extends CordovaPlugin {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             activity.startActivity(intent);
             callback.success("Sucess in action: moveToForeground");
-        } catch (Exception e) {   
+        } catch (Exception e) {
             callback.error("Erro in action: moveToForeground: " + e);
         }
         // try {
