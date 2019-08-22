@@ -44,6 +44,8 @@ import org.json.JSONObject;
 import java.util.Arrays;
 import java.util.List;
 
+import android.util.Log;
+
 import static android.R.string.cancel;
 import static android.R.string.ok;
 import static android.R.style.Theme_DeviceDefault_Light_Dialog;
@@ -131,23 +133,56 @@ public class snBatteryOptimization extends CordovaPlugin {
     }
 
     private void moveToForeground() {
+        Log.d("Bring", "action is 1:");
         try {
-            Activity activity = cordova.getActivity();
-            Intent intent     = new Intent();
-            String pkgName    = activity.getPackageName();
-         
-            intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-            intent.setData(Uri.parse("package:" + pkgName));
-            intent.addFlags(
-                Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            Log.d("Bring", "I see you baby");
 
-            activity.startActivity(intent);
+            Activity activity = cordova.getActivity();
+            Intent notificationIntent = new Intent(activity, activity.getClass());
+            Log.d("Bring", "I see you baby 1");
+            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            Log.d("Bring", "I see you baby 2");
+            PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, notificationIntent, 0);
+            Log.d("Bring", "I see you baby 3");
+         
+            try {
+                Log.d("Bring", "I see you baby 4");
+                pendingIntent.send();
+                Log.d("Bring", "I see you baby 5");
+            } catch (PendingIntent.CanceledException e) {
+                Log.d("Bring", "I see you baby 6");
+                e.printStackTrace();
+                Log.d("Bring", "I see you baby 7");
+            }
+            Log.d("Bring", "I see you baby 8");
+            //activity.startActivity(intent);
             callback.success("Sucess in action: moveToForeground");
         } catch (Exception e) {
+            Log.d("Bring", "I see you baby 9");
             callback.error("Erro in action: moveToForeground: " + e);
+            Log.d("Bring", "I see you baby 10");
         }
+        Log.d("Bring", "I see you baby 11");
     }
+
+    // private void moveToForeground() {
+    //     try {
+    //         Activity activity = cordova.getActivity();
+    //         Intent intent     = new Intent(activity);
+    //         String pkgName    = activity.getPackageName();
+         
+    //         intent.setAction(ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+    //         intent.setData(Uri.parse("package:" + pkgName));
+    //         intent.addFlags(
+    //             Intent.FLAG_ACTIVITY_SINGLE_TOP |
+    //             Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+
+    //         activity.startActivity(intent);
+    //         callback.success("Sucess in action: moveToForeground");
+    //     } catch (Exception e) {
+    //         callback.error("Erro in action: moveToForeground: " + e);
+    //     }
+    // }
 
     /**
      * Disables battery optimizations for the app.
