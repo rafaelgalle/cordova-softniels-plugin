@@ -134,36 +134,29 @@ public class snBatteryOptimization extends CordovaPlugin {
     }
 
     private void moveToForeground() {
-        Log.d("Bring", "action is 1:");
         try {
-            Log.d("Bring", "I see you baby");
-
             Activity activity = cordova.getActivity();
-            Intent notificationIntent = new Intent(activity, activity.getClass());
-            Log.d("Bring", "I see you baby 1");
-            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            Log.d("Bring", "I see you baby 2");
-            PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, notificationIntent, 0);
-            Log.d("Bring", "I see you baby 3");
-         
-            try {
-                Log.d("Bring", "I see you baby 4");
-                pendingIntent.send();
-                Log.d("Bring", "I see you baby 5");
-            } catch (PendingIntent.CanceledException e) {
-                Log.d("Bring", "I see you baby 6");
-                e.printStackTrace();
-                Log.d("Bring", "I see you baby 7");
-            }
-            Log.d("Bring", "I see you baby 8");
-            //activity.startActivity(intent);
+            Intent intent = new Intent(activity, activity.getClass());
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            activity.startActivity(intent);
             callback.success("Sucess in action: moveToForeground");
-        } catch (Exception e) {
-            Log.d("Bring", "I see you baby 9");
+        } catch (Exception e) {   
             callback.error("Erro in action: moveToForeground: " + e);
-            Log.d("Bring", "I see you baby 10");
         }
-        Log.d("Bring", "I see you baby 11");
+        // try {
+        //     Activity activity = cordova.getActivity();
+        //     Intent notificationIntent = new Intent(activity, activity.getClass());
+        //     notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        //     PendingIntent pendingIntent = PendingIntent.getActivity(activity, 0, notificationIntent, 0);
+        //     try {
+        //         pendingIntent.send();
+        //     } catch (PendingIntent.CanceledException e) {
+        //         e.printStackTrace();
+        //     }
+        //     callback.success("Sucess in action: moveToForeground");
+        // } catch (Exception e) {   
+        //     callback.error("Erro in action: moveToForeground: " + e);
+        // }
     }
 
     // private void moveToForeground() {
