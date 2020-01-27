@@ -1,16 +1,21 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="cordova-softniels-plugin" version="1.0.1">
-<!-- <plugin id="cordova-softniels-plugin" version="1.0.0"> -->
-	<name>snBatteryOptimization</name>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-softniels-plugin"
+        version="1.0.2">
+	
+    <name>snBatteryOptimization</name>
     <description>Controle sobre otimização de bateria.</description>
-    <license>MIT</license>
-    <keywords>battery, optimization</keywords>
     <repo>https://github.com/rafaelgalle/cordova-softniels-plugin.git</repo>
+    <keywords>battery, optimization</keywords>
+    <license>Apache 2.0</license>
+    <author>Rafael Galle</author>
     <issue>https://github.com/rafaelgalle/cordova-softniels-plugin/issues</issue>
 
     <!-- cordova -->
     <engines>
         <engine name="cordova" version=">=3.0.0" />
+        <engine name="android-sdk" version=">=16" />
     </engines>
 
     <!-- js -->
