@@ -1,6 +1,6 @@
 {
   "name": "cordova-softniels-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Controle sobre otimização de bateria.",
   "cordova": {
     "id": "cordova-softniels-plugin",
