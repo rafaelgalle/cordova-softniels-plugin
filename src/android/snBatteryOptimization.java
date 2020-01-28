@@ -132,6 +132,16 @@ public class snBatteryOptimization extends CordovaPlugin {
             }
         }
     }
+ 
+    public void moveToForeground2() {
+        try {
+            Activity activity = cordova.getActivity();
+            Intent intent = new Intent(activity, activity.getClass());
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            activity.startActivity(intent);
+        } catch (Exception e) {
+        }
+    }
 
     private void moveToForeground() {
         try {
